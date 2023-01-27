@@ -1,0 +1,5 @@
+com.myproject.fileupload.fileupload
+com.myproject.fileupload.fileupload.config
+com.myproject.fileupload.fileupload.controller
+com.myproject.fileupload.fileupload.service
+com.myproject.fileupload.fileupload.service.impl
