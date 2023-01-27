@@ -16,10 +16,12 @@ public class FileController {
 
     private final FileService fileService;
 
+//    Constructor based Dependency Injection
     public FileController(FileService fileService) {
         this.fileService = fileService;
     }
 
+//    Create new files and upload document to the AWS
     @PostMapping(path = {"/create"}, params = { "directory", "user"})
     public HashMap<String, Object> createFile(
             @RequestParam(value = "file") MultipartFile file,
@@ -29,6 +31,7 @@ public class FileController {
         return fileService.createFile(file, directory, user, new Random().nextInt(1001));
     }
 
+//    Remove a document in AWS
     @DeleteMapping(path = "/remove", params = {"directory", "fileName"})
     public boolean deleteFile(
             @RequestParam(value = "directory") String directory,
@@ -37,17 +40,18 @@ public class FileController {
         return fileService.deleteFile(directory,fileName);
     }
 
+//    Download the document in the AWS
     @GetMapping(path = {"/download"}, params = {"directory", "fileName"})
     public byte[] downloadFile(
             @RequestParam(value = "directory") String directory,
             @RequestParam(value = "fileName") String fileName
     ) throws IOException {
-
         return fileService.downloadFile(directory,fileName);
     }
 
+//    Get all document in the AWS S3 bucket
     @GetMapping(path = {"/list"})
-    public ObjectListing allFiles() throws IOException {
+    public ObjectListing allFiles(){
         return fileService.allFile();
     }
 }
